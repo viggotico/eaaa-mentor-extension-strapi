@@ -479,6 +479,17 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     age: Schema.Attribute.Integer;
+    uddannelse: Schema.Attribute.Enumeration<
+      [
+        'Datamatiker',
+        'Multimediedesigner',
+        'Finans\u00F8konom',
+        'FinansBachelor',
+        'Markedsf\u00F8rings\u00F8konom',
+        'MultimediaDesign',
+      ]
+    >;
+    semester: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

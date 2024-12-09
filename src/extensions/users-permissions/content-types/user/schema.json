@@ -67,6 +67,20 @@
     },
     "age": {
       "type": "integer"
+    },
+    "uddannelse": {
+      "type": "enumeration",
+      "enum": [
+        "Datamatiker",
+        "Multimediedesigner",
+        "Finansøkonom",
+        "FinansBachelor",
+        "Markedsføringsøkonom",
+        "MultimediaDesign"
+      ]
+    },
+    "semester": {
+      "type": "string"
     }
   }
 }
