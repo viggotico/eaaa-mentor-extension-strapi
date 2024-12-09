@@ -10,6 +10,19 @@ export interface ApiChatChat extends Struct.CollectionTypeSchema {
   options: {
     draftAndPublish: true;
   };
+}
+
+export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
+  collectionName: 'bookings';
+  info: {
+    singularName: 'booking';
+    pluralName: 'bookings';
+    displayName: 'Booking';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
   attributes: {
     mentor: Schema.Attribute.Relation<
       'manyToOne',
@@ -55,6 +68,10 @@ export interface ApiChatMessageChatMessage extends Struct.CollectionTypeSchema {
     mentorChat: Schema.Attribute.Relation<'manyToOne', 'api::chat.chat'>;
     menteeChat: Schema.Attribute.Relation<'manyToOne', 'api::chat.chat'>;
     content: Schema.Attribute.Text;
+    date: Schema.Attribute.DateTime;
+    confirmed: Schema.Attribute.Boolean;
+    meetingType: Schema.Attribute.Enumeration<['Physical', 'Online', 'Both']>;
+    rejected: Schema.Attribute.Boolean;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -65,7 +82,8 @@ export interface ApiChatMessageChatMessage extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::chat-message.chat-message'
+      'api::chat-message.chat-message',
+      'api::booking.booking'
     > &
       Schema.Attribute.Private;
   };
@@ -555,6 +573,28 @@ export interface PluginUsersPermissionsUser
     type: Schema.Attribute.Enumeration<['Mentor', 'Mentees']>;
     mentorChats: Schema.Attribute.Relation<'oneToMany', 'api::chat.chat'>;
     menteeChats: Schema.Attribute.Relation<'oneToMany', 'api::chat.chat'>;
+    uddannelse: Schema.Attribute.Enumeration<
+      [
+        'Datamatiker',
+        'Multimediedesigner',
+        'Finans\u00F8konom',
+        'FinansBachelor',
+        'Markedsf\u00F8rings\u00F8konom',
+        'MultimediaDesign',
+      ]
+    >;
+    semester: Schema.Attribute.String;
+    acceptingMentees: Schema.Attribute.Boolean;
+    mentorBookings: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::booking.booking'
+    >;
+    menteeBookings: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::booking.booking'
+    >;
+    meetingType: Schema.Attribute.Enumeration<['Physical', 'Online', 'Both']>;
+    availability: Schema.Attribute.Component<'content.availability', true>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -945,6 +985,7 @@ declare module '@strapi/strapi' {
     export interface ContentTypeSchemas {
       'api::chat.chat': ApiChatChat;
       'api::chat-message.chat-message': ApiChatMessageChatMessage;
+      'api::booking.booking': ApiBookingBooking;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_content_availabilities",
+  "info": {
+    "displayName": "Availability",
+    "icon": "emotionHappy"
+  },
+  "options": {},
+  "attributes": {
+    "date": {
+      "type": "datetime"
+    }
+  }
+}

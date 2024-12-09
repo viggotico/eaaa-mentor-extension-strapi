@@ -92,6 +92,48 @@
       "relation": "oneToMany",
       "target": "api::chat.chat",
       "mappedBy": "mentee"
+    },
+    "uddannelse": {
+      "type": "enumeration",
+      "enum": [
+        "Datamatiker",
+        "Multimediedesigner",
+        "Finansøkonom",
+        "FinansBachelor",
+        "Markedsføringsøkonom",
+        "MultimediaDesign"
+      ]
+    },
+    "semester": {
+      "type": "string"
+    },
+    "acceptingMentees": {
+      "type": "boolean"
+    },
+    "mentorBookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "mentor"
+    },
+    "menteeBookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "mentee"
+    },
+    "meetingType": {
+      "type": "enumeration",
+      "enum": [
+        "Physical",
+        "Online",
+        "Both"
+      ]
+    },
+    "availability": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.availability"
     }
   }
 }
