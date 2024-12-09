@@ -81,6 +81,21 @@
     },
     "semester": {
       "type": "string"
+    },
+    "acceptingMentees": {
+      "type": "boolean"
+    },
+    "mentorBookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "mentor"
+    },
+    "menteeBookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "mentee"
     }
   }
 }
