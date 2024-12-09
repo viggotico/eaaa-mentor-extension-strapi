@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bookings",
+  "info": {
+    "singularName": "booking",
+    "pluralName": "bookings",
+    "displayName": "Booking",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "mentor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "mentorBookings"
+    },
+    "mentee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "menteeBookings"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "confirmed": {
+      "type": "boolean"
+    },
+    "meetingType": {
+      "type": "enumeration",
+      "enum": [
+        "Physical",
+        "Online",
+        "Both"
+      ]
+    },
+    "rejected": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,5 +1,116 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
+export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
+  collectionName: 'bookings';
+  info: {
+    singularName: 'booking';
+    pluralName: 'bookings';
+    displayName: 'Booking';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    mentor: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    mentee: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    date: Schema.Attribute.DateTime;
+    confirmed: Schema.Attribute.Boolean;
+    meetingType: Schema.Attribute.Enumeration<['Physical', 'Online', 'Both']>;
+    rejected: Schema.Attribute.Boolean;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::booking.booking'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiChatChat extends Struct.CollectionTypeSchema {
+  collectionName: 'chats';
+  info: {
+    singularName: 'chat';
+    pluralName: 'chats';
+    displayName: 'Chat';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    mentor: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    mentee: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    mentorMessages: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::chat-message.chat-message'
+    >;
+    menteeMessages: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::chat-message.chat-message'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::chat.chat'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiChatMessageChatMessage extends Struct.CollectionTypeSchema {
+  collectionName: 'chat_messages';
+  info: {
+    singularName: 'chat-message';
+    pluralName: 'chat-messages';
+    displayName: 'Chat Message';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    mentorChat: Schema.Attribute.Relation<'manyToOne', 'api::chat.chat'>;
+    menteeChat: Schema.Attribute.Relation<'manyToOne', 'api::chat.chat'>;
+    content: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::chat-message.chat-message'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -479,6 +590,31 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     age: Schema.Attribute.Integer;
+    skills: Schema.Attribute.Text;
+    subject: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['Mentor', 'Mentees']>;
+    mentorChats: Schema.Attribute.Relation<'oneToMany', 'api::chat.chat'>;
+    menteeChats: Schema.Attribute.Relation<'oneToMany', 'api::chat.chat'>;
+    uddannelse: Schema.Attribute.Enumeration<
+      [
+        'Datamatiker',
+        'Multimediedesigner',
+        'Finans\u00F8konom',
+        'FinansBachelor',
+        'Markedsf\u00F8rings\u00F8konom',
+        'MultimediaDesign',
+      ]
+    >;
+    semester: Schema.Attribute.String;
+    acceptingMentees: Schema.Attribute.Boolean;
+    mentorBookings: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::booking.booking'
+    >;
+    menteeBookings: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::booking.booking'
+    >;
     meetingType: Schema.Attribute.Enumeration<['Physical', 'Online', 'Both']>;
     availability: Schema.Attribute.Component<'content.availability', true>;
     createdAt: Schema.Attribute.DateTime;
@@ -869,6 +1005,9 @@ export interface AdminTransferTokenPermission
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
+      'api::booking.booking': ApiBookingBooking;
+      'api::chat.chat': ApiChatChat;
+      'api::chat-message.chat-message': ApiChatMessageChatMessage;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
