@@ -479,6 +479,8 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     age: Schema.Attribute.Integer;
+    meetingType: Schema.Attribute.Enumeration<['Physical', 'Online', 'Both']>;
+    availability: Schema.Attribute.Component<'content.availability', true>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
