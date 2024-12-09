@@ -80,6 +80,18 @@
         "Mentor",
         "Mentees"
       ]
+    },
+    "mentorChats": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::chat.chat",
+      "mappedBy": "mentor"
+    },
+    "menteeChats": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::chat.chat",
+      "mappedBy": "mentee"
     }
   }
 }
