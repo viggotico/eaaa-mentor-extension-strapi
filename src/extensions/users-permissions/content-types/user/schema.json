@@ -96,6 +96,19 @@
       "relation": "oneToMany",
       "target": "api::booking.booking",
       "mappedBy": "mentee"
+    },
+    "meetingType": {
+      "type": "enumeration",
+      "enum": [
+        "Physical",
+        "Online",
+        "Both"
+      ]
+    },
+    "availability": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.availability"
     }
   }
 }

@@ -539,6 +539,8 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::booking.booking'
     >;
+    meetingType: Schema.Attribute.Enumeration<['Physical', 'Online', 'Both']>;
+    availability: Schema.Attribute.Component<'content.availability', true>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
