@@ -67,6 +67,19 @@
     },
     "age": {
       "type": "integer"
+    },
+    "meetingType": {
+      "type": "enumeration",
+      "enum": [
+        "Physical",
+        "Online",
+        "Both"
+      ]
+    },
+    "availability": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.availability"
     }
   }
 }
