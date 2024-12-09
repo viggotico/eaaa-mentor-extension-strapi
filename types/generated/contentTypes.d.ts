@@ -479,6 +479,9 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     age: Schema.Attribute.Integer;
+    skills: Schema.Attribute.Text;
+    subject: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['Mentor', 'Mentees']>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
