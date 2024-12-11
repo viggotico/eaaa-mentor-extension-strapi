@@ -78,7 +78,7 @@
       "type": "enumeration",
       "enum": [
         "Mentor",
-        "Mentees"
+        "Mentee"
       ]
     },
     "mentorChats": {
@@ -99,9 +99,8 @@
         "Datamatiker",
         "Multimediedesigner",
         "Finansøkonom",
-        "FinansBachelor",
-        "Markedsføringsøkonom",
-        "MultimediaDesign"
+        "Finansbachelor",
+        "Markedsføringsøkonom"
       ]
     },
     "semester": {
@@ -134,6 +133,12 @@
       "type": "component",
       "repeatable": true,
       "component": "content.availability"
+    },
+    "name": {
+      "type": "string"
+    },
+    "surname": {
+      "type": "string"
     }
   }
 }

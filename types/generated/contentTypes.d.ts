@@ -95,6 +95,7 @@ export interface ApiChatMessageChatMessage extends Struct.CollectionTypeSchema {
     mentorChat: Schema.Attribute.Relation<'manyToOne', 'api::chat.chat'>;
     menteeChat: Schema.Attribute.Relation<'manyToOne', 'api::chat.chat'>;
     content: Schema.Attribute.Text;
+    type: Schema.Attribute.Enumeration<['Mentor', 'Mentee']>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -592,7 +593,7 @@ export interface PluginUsersPermissionsUser
     age: Schema.Attribute.Integer;
     skills: Schema.Attribute.Text;
     subject: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['Mentor', 'Mentees']>;
+    type: Schema.Attribute.Enumeration<['Mentor', 'Mentee']>;
     mentorChats: Schema.Attribute.Relation<'oneToMany', 'api::chat.chat'>;
     menteeChats: Schema.Attribute.Relation<'oneToMany', 'api::chat.chat'>;
     uddannelse: Schema.Attribute.Enumeration<
@@ -600,9 +601,8 @@ export interface PluginUsersPermissionsUser
         'Datamatiker',
         'Multimediedesigner',
         'Finans\u00F8konom',
-        'FinansBachelor',
+        'Finansbachelor',
         'Markedsf\u00F8rings\u00F8konom',
-        'MultimediaDesign',
       ]
     >;
     semester: Schema.Attribute.String;
@@ -617,6 +617,8 @@ export interface PluginUsersPermissionsUser
     >;
     meetingType: Schema.Attribute.Enumeration<['Physical', 'Online', 'Both']>;
     availability: Schema.Attribute.Component<'content.availability', true>;
+    name: Schema.Attribute.String;
+    surname: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
