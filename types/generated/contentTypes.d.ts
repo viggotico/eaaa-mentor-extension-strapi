@@ -619,6 +619,8 @@ export interface PluginUsersPermissionsUser
     availability: Schema.Attribute.Component<'content.availability', true>;
     name: Schema.Attribute.String;
     surname: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
